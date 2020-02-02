@@ -61,7 +61,7 @@ public class NBody {
         StdOut.printf("%d\n",P.length);
         StdOut.printf("%.2e\n",Uradius);
         for(int i=0;i<P.length;i++){
-            StdOut.printf("%11.4e %11.4e %11.4e %11.4e %12s\n",P[i].xxPos,P[i].yyPos,P[i].xxVel,P[i].yyVel,P[i].mass,P[i].imgFileName);
+            StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",P[i].xxPos,P[i].yyPos,P[i].xxVel,P[i].yyVel,P[i].mass,P[i].imgFileName);
         }
     }
 }
