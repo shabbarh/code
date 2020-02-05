@@ -12,22 +12,24 @@ public class ArrayDeque<T>{
     }
     public void addFirst(T x){
         if(size==items.length)
-            resize(items.length*2);
+            resize(size*2);
         items[nextFirst]=x;
         nextFirst=Math.floorMod(--nextFirst,items.length);
         size=size+1;
     }
     private void resize(int capacity){
-        T a[]=(T[]) new Object[capacity];
-        for(int i=0;i<size;i++)
-            a[i]=get(i);
-        nextFirst=capacity-1;
-        nextLast=size;
-        items=a;
+        if(capacity>=8) {
+            T[] a = (T[]) new Object[capacity];
+            for (int i = 0; i < size; i++)
+                a[i] = get(i);
+            nextFirst = capacity - 1;
+            nextLast = size;
+            items = a;
+        }
     }
     public void addLast(T x){
         if(size==items.length)
-            resize(items.length*2);
+            resize(size*2);
         items[nextLast]=x;
         nextLast=Math.floorMod(++nextLast,items.length);
         size=size+1;
@@ -50,7 +52,7 @@ public class ArrayDeque<T>{
     public T removeFirst(){
         if(((float)size/items.length)<0.25)
             resize(items.length/2);
-        if(isEmpty()){
+        if(!isEmpty()){
             T res=items[Math.floorMod(++nextFirst,items.length)];
             nextFirst=Math.floorMod(nextFirst,items.length);
             items[nextFirst]=null;
@@ -63,7 +65,7 @@ public class ArrayDeque<T>{
     public T removeLast(){
         if(((float)size/items.length)<0.25)
             resize(items.length/2);
-        if(isEmpty()){
+        if(!isEmpty()){
             T res=items[Math.floorMod(--nextLast,items.length)];
             nextLast=Math.floorMod(nextLast,items.length);
             items[nextLast]=null;
