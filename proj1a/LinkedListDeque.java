@@ -1,134 +1,85 @@
-public class LinkedListDeque<T> {
-    private Node sentinel;
-    private int size;
-
-    public LinkedListDeque() {
-        sentinel = new Node(null, sentinel, sentinel);
-        size = 0;
-    }
-
-    public void addFirst(T item) {
-        if (size == 0) {
-            sentinel = new Node(null, sentinel, sentinel);
-            sentinel.next = new Node(item, sentinel, sentinel);
-            sentinel.prev = sentinel.next;
-        } else {
-            Node temp = new Node(item, sentinel, sentinel.next);
-            sentinel.next.prev = temp;
-            sentinel.next = temp;
-        }
-        size += 1;
-    }
-
-    public void addLast(T item) {
-        if (size == 0) {
-            sentinel = new Node(null, sentinel, sentinel);
-            sentinel.next = new Node(item, sentinel, sentinel);
-            sentinel.prev = sentinel.next;
-        } else {
-            Node temp = new Node(item, sentinel.prev, sentinel);
-            sentinel.prev.next = temp;
-            sentinel.prev = temp;
-        }
-        size += 1;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public void printDeque() {
-        Node ptr = sentinel.next;
-        while (ptr.next != sentinel) {
-            System.out.print(ptr.item + " ");
-            ptr = ptr.next;
-        }
-        System.out.println(ptr.item);
-    }
-
-    public T removeFirst() {
-        if (size == 0) {
-            return null;
-        }
-        if (size == 1) {
-            Node temp = sentinel.next;
-            sentinel.prev = null;
-            sentinel.next = null;
-            size -= 1;
-            return temp.item;
-        } else {
-            size -= 1;
-            Node temp = sentinel.next;
-            sentinel.next = temp.next;
-            temp.next.prev = sentinel;
-            return temp.item;
-        }
-    }
-
-    public T removeLast() {
-        if (size == 0) {
-            return null;
-        }
-        if (size == 1) {
-            Node temp = sentinel.prev;
-            sentinel.next = null;
-            sentinel.prev = null;
-            size -= 1;
-            return temp.item;
-        } else {
-            size -= 1;
-            Node temp = sentinel.prev;
-            sentinel.prev = temp.prev;
-            temp.prev.next = sentinel;
-            return temp.item;
-        }
-    }
-
-    public T get(int index) {
-        if (index < 0 || index > size) {
-            return null;
-        } else {
-            int position = 0;
-            Node ptr = sentinel.next;
-            while (position != index) {
-                ptr = ptr.next;
-                position++;
-            }
-            return ptr.item;
-        }
-    }
-
-    public T getRecursive(int index) {
-        if (index < 0 || index > size) {
-            return null;
-        }
-        return getRecursiveHelper(index, sentinel.next);
-    }
-
-    private T getRecursiveHelper(int index, Node p) {
-        if (index == 0) {
-            return p.item;
-        } else {
-            return getRecursiveHelper(--index, p.next);
-        }
-    }
-
-    private class Node {
-        T item;
+public class LinkedListDeque<Boom>{
+    private class Node{
+        Boom item;
         Node prev;
         Node next;
-
-        Node(T item, Node prev, Node next) {
-            this.item = item;
-            this.prev = prev;
-            this.next = next;
+        public Node(Boom x, Node p, Node n){
+            item = x;
+            prev =p;
+            next =n;
         }
-
-
     }
-
+    private Node fsentinal;
+    private Node bsentinal;
+    private int size;
+    public LinkedListDeque(){
+        fsentinal=new Node(null,null,null);
+        bsentinal=new Node(null,fsentinal,null);
+        fsentinal.next=bsentinal;
+        size=0;
+    }
+    public void addFirst(Boom x){
+        fsentinal.next=new Node(x,fsentinal,fsentinal.next);
+        fsentinal.next.next.prev=fsentinal.next;
+        size+=1;
+    }
+    public void addLast(Boom x){
+        bsentinal.prev=new Node(x,bsentinal.prev,bsentinal);
+        bsentinal.prev.prev.next=bsentinal.prev;
+        size+=1;
+    }
+    public boolean isEmpty(){
+        if(size>0)
+            return false;
+        else
+            return true;
+    }
+    public int size(){
+        return size;
+    }
+    public Boom get(int i) {
+        if (size - 1 >= i) {
+            Node p = fsentinal.next;
+            while (i != 0) {
+                p = p.next;
+                i--;
+            }
+            return p.item;
+        } else
+            return null;
+    }
+    public Boom removeFirst () {
+        if (size > 0) {
+            Boom x = fsentinal.next.item;
+            fsentinal.next = fsentinal.next.next;
+            fsentinal.next.prev = fsentinal;
+            size = -1;
+            return x;
+        } else
+            return null;
+    }
+    public Boom removeLast () {
+       if (size > 0) {
+           Boom x = bsentinal.prev.item;
+           bsentinal.prev = bsentinal.prev.prev;
+           bsentinal.prev.next = bsentinal;
+           size -= 1;
+           return x;
+       }
+       else
+           return null;
+    }
+    public void printDeque() {
+        if (size > 0) {
+            Node p = fsentinal.next;
+            System.out.print(p.item);
+            p = p.next;
+            while (p.next != null) {
+                System.out.print(" " + p.item);
+                p = p.next;
+            }
+        }
+        else
+            return;
+    }
 }
