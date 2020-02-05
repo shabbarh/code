@@ -14,14 +14,8 @@ public class ArrayDeque<T>{
         if(size==items.length)
             resize(items.length*2);
         items[nextFirst]=x;
-        nextFirst=Math.floorMod(nextFirst,items.length);
+        nextFirst=Math.floorMod(--nextFirst,items.length);
         size=size+1;
-    }
-    private int getLastIndex(){
-        if(nextLast==0)
-            return items.length;
-        else
-            return nextLast-1;
     }
     private void resize(int capacity){
         T a[]=(T[]) new Object[capacity];
@@ -35,7 +29,7 @@ public class ArrayDeque<T>{
         if(size==items.length)
             resize(items.length*2);
         items[nextLast]=x;
-        nextLast=Math.floorMod(++nextFirst,items.length);
+        nextLast=Math.floorMod(++nextLast,items.length);
         size=size+1;
     }
     public boolean isEmpty(){return size==0;}
@@ -56,11 +50,10 @@ public class ArrayDeque<T>{
     public T removeFirst(){
         if(((float)size/items.length)<0.25)
             resize(items.length/2);
-        if(size>0){
-            int index=Math.floorMod(nextFirst+1,items.length);
-            T res=items[index];
-            items[index]=null;
-            nextFirst=Math.floorMod(++nextFirst,items.length);
+        if(isEmpty()){
+            T res=items[Math.floorMod(++nextFirst,items.length)];
+            nextFirst=Math.floorMod(nextFirst,items.length);
+            items[nextFirst]=null;
             size=size-1;
             return res;
         }
@@ -70,11 +63,10 @@ public class ArrayDeque<T>{
     public T removeLast(){
         if(((float)size/items.length)<0.25)
             resize(items.length/2);
-        if(size>0){
-            int index=Math.floorMod(nextLast-1,items.length);
-            T res=items[index];
-            items[index]=null;
-            nextLast=Math.floorMod(--nextLast,items.length);
+        if(isEmpty()){
+            T res=items[Math.floorMod(--nextLast,items.length)];
+            nextLast=Math.floorMod(nextLast,items.length);
+            items[nextLast]=null;
             size=size-1;
           return res;
         }
