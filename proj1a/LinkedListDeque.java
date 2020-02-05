@@ -48,6 +48,18 @@ public class LinkedListDeque<T>{
         } else
             return null;
     }
+    public T getRecursive(int i){
+        if(i<0||i>size)
+            return null;
+        else
+            return getRecursiveHelper(i,fsentinal.next);
+    }
+    private T getRecursiveHelper(int i,Node p){
+        if(i==0)
+            return p.item;
+        else
+            return getRecursiveHelper(--i,p.next);
+    }
     public T removeFirst () {
         if (size > 0) {
             T x = fsentinal.next.item;
