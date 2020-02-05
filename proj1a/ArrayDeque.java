@@ -1,16 +1,16 @@
-public class ArrayDeque<Boom>{
-    private Boom items[];
+public class ArrayDeque<T>{
+    private T items[];
     private int size;
     private int nextFirst;
     private int nextLast;
 
     public ArrayDeque(){
-        items = (Boom[]) new Object[8];
+        items = (T[]) new Object[8];
         size=0;
         nextFirst=4;
         nextLast=5;
     }
-    public void addFirst(Boom x){
+    public void addFirst(T x){
         if(size==items.length)
             enlarge();
         items[nextFirst]=x;
@@ -58,7 +58,7 @@ public class ArrayDeque<Boom>{
             return nextLast-1;
     }
     private void enlarge(){
-        Boom a[]=(Boom[])new Object[size*2];
+        T a[]=(T[])new Object[size*2];
         int firstindex=getFirstIndex();
         int startindex=a.length/4; //start index of new array
         if(firstindex==0)
@@ -74,7 +74,7 @@ public class ArrayDeque<Boom>{
     private void shrink(){
         if(items.length==8)
             return;
-        Boom a[] =(Boom[]) new Object[items.length/2];
+        T a[] =(T[]) new Object[items.length/2];
         int firstindex=getFirstIndex();
         int startindex=a.length/4;
         if(firstindex==0)
@@ -88,7 +88,7 @@ public class ArrayDeque<Boom>{
         nextLast=startindex+size;
         items=a;
     }
-    public void addLast(Boom x){
+    public void addLast(T x){
         if(size==items.length)
             enlarge();
         items[nextLast]=x;
@@ -123,12 +123,12 @@ public class ArrayDeque<Boom>{
             }
         }
     }
-    public Boom removeFirst(){
+    public T removeFirst(){
         if(size/items.length<0.25)
             shrink();
         if(size>0){
             int index=getFirstIndex();
-            Boom res=items[index];
+            T res=items[index];
             items[index]=null;
             setNextFirst(false);
             size=size-1;
@@ -137,12 +137,12 @@ public class ArrayDeque<Boom>{
         else
             return null;
     }
-    public Boom removeLast(){
+    public T removeLast(){
         if(size/items.length<0.25)
             shrink();
         if(size>0){
             int index=getFirstIndex();
-            Boom res=items[index];
+            T res=items[index];
             items[index]=null;
             setNextLast(false);
             size=size-1;
@@ -151,7 +151,7 @@ public class ArrayDeque<Boom>{
         else
           return null;
     }
-    public Boom get(int i){
+    public T get(int i){
         if(i>size-1)
             return null;
         else{

@@ -1,9 +1,9 @@
-public class LinkedListDeque<Boom>{
+public class LinkedListDeque<T>{
     private class Node{
-        Boom item;
+        T item;
         Node prev;
         Node next;
-        public Node(Boom x, Node p, Node n){
+        public Node(T x, Node p, Node n){
             item = x;
             prev =p;
             next =n;
@@ -18,12 +18,12 @@ public class LinkedListDeque<Boom>{
         fsentinal.next=bsentinal;
         size=0;
     }
-    public void addFirst(Boom x){
+    public void addFirst(T x){
         fsentinal.next=new Node(x,fsentinal,fsentinal.next);
         fsentinal.next.next.prev=fsentinal.next;
         size+=1;
     }
-    public void addLast(Boom x){
+    public void addLast(T x){
         bsentinal.prev=new Node(x,bsentinal.prev,bsentinal);
         bsentinal.prev.prev.next=bsentinal.prev;
         size+=1;
@@ -37,7 +37,7 @@ public class LinkedListDeque<Boom>{
     public int size(){
         return size;
     }
-    public Boom get(int i) {
+    public T get(int i) {
         if (size - 1 >= i) {
             Node p = fsentinal.next;
             while (i != 0) {
@@ -48,9 +48,9 @@ public class LinkedListDeque<Boom>{
         } else
             return null;
     }
-    public Boom removeFirst () {
+    public T removeFirst () {
         if (size > 0) {
-            Boom x = fsentinal.next.item;
+            T x = fsentinal.next.item;
             fsentinal.next = fsentinal.next.next;
             fsentinal.next.prev = fsentinal;
             size = -1;
@@ -58,9 +58,9 @@ public class LinkedListDeque<Boom>{
         } else
             return null;
     }
-    public Boom removeLast () {
+    public T removeLast () {
        if (size > 0) {
-           Boom x = bsentinal.prev.item;
+           T x = bsentinal.prev.item;
            bsentinal.prev = bsentinal.prev.prev;
            bsentinal.prev.next = bsentinal;
            size -= 1;
