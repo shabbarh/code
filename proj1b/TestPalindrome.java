@@ -25,5 +25,7 @@ public class TestPalindrome {
         assertFalse(palindrome.isPalindrome("false"));
         CharacterComparator cc=new OffByOne();
         assertTrue(palindrome.isPalindrome("flake",cc));
+        cc=new OffByN(5);
+        assertTrue(palindrome.isPalindrome("binding",cc));
     }
 }

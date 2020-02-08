@@ -9,6 +9,7 @@ public class Palindrome {
         return null;
     }
     public boolean isPalindrome(String word){
+        word.toLowerCase();
         Deque d=wordToDeque(word);
             return isPalindrome(d);
     }
@@ -20,6 +21,7 @@ public class Palindrome {
         else return false;
     }
     public boolean isPalindrome(String word,CharacterComparator cc){
+        word.toLowerCase();
         Deque d=wordToDeque(word);
         return isPalindrome(d,cc);
     }
