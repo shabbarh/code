@@ -24,10 +24,10 @@ public class Palindrome {
         return isPalindrome(d,cc);
     }
     private boolean isPalindrome(Deque d,CharacterComparator cc){
-        CharacterComparator offByOne= new OffByOne();
+        //CharacterComparator offByOne= new OffByOne();
         if(d.size()==0||d.size()==1)
             return true;
-        else if(offByOne.equalChars((char)d.removeFirst(),(char)d.removeLast()))
+        else if(cc.equalChars((char)d.removeFirst(),(char)d.removeLast()))
             return isPalindrome(d,cc);
         else return false;
     }
