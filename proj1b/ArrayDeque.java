@@ -77,10 +77,10 @@ public class ArrayDeque<T> implements  Deque<T>{
             nextLast=Math.floorMod(nextLast,items.length);
             items[nextLast]=null;
             size=size-1;
-          return res;
+            return res;
         }
         else
-          return null;
+            return null;
     }
     @Override
     public T get(int i){

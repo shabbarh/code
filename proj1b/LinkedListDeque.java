@@ -71,15 +71,15 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
     @Override
     public T removeLast () {
-       if (size > 0) {
-           T x = bsentinal.prev.item;
-           bsentinal.prev = bsentinal.prev.prev;
-           bsentinal.prev.next = bsentinal;
-           size=size- 1;
-           return x;
-       }
-       else
-           return null;
+        if (size > 0) {
+            T x = bsentinal.prev.item;
+            bsentinal.prev = bsentinal.prev.prev;
+            bsentinal.prev.next = bsentinal;
+            size=size- 1;
+            return x;
+        }
+        else
+            return null;
     }
     @Override
     public void printDeque() {
