@@ -70,10 +70,10 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
             throw new RuntimeException("Ring buffer underflow");
         return rb[first];
     }
-    @Override
-    public boolean isEmpty(){ return this.fillCount==0; }
-    @Override
-    public boolean isFull(){ return this.fillCount==this.capacity; }
+    //@Override
+    //private boolean isEmpty(){ return this.fillCount==0; }
+    //@Override
+    //private boolean isFull(){ return this.fillCount==this.capacity; }
     // TODO: When you get to part 5, implement the needed code to support iteration.
     @Override
     public Iterator<T> iterator(){
