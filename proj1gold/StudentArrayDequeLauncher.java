@@ -1,5 +1,5 @@
 /** If you project is set up properly, this file should execute. 
-* One thing you might consider is to try printing out the sequence of
+* One thing you m   ight consider is to try printing out the sequence of
 * operations */
 public class StudentArrayDequeLauncher {
     public static void main(String[] args) {
